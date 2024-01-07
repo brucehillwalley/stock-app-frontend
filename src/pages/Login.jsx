@@ -9,9 +9,13 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { Formik, Form } from "formik";
+import { object, string } from "yup";
 
 const Login = () => {
-  const loginShema = {};
+  const loginSchema = object({
+    email: string().email().required(),
+    password: string().required(),
+  });
 
   return (
     <Container maxWidth="lg">
@@ -52,7 +56,7 @@ const Login = () => {
 
           <Formik
             initialValues={{ email: "", password: "" }}
-            validationSchema={loginShema}
+            validationSchema={loginSchema}
             onSubmit={(values, actions) => {
               // TODO login(post) isteği
               actions.resetForm();
