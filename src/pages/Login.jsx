@@ -65,7 +65,7 @@ const Login = () => {
 
             // component={} //? bu şekilde de yapılabilir
           >
-            {({ values, handleChange }) => (
+            {({ values, handleChange, touched, errors }) => (
               <Form>
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                   <TextField
@@ -76,6 +76,8 @@ const Login = () => {
                     variant="outlined"
                     value={values.email}
                     onChange={handleChange}
+                    error={touched.email && Boolean(errors.email)}
+                    helperText={errors.email}
                   />
                   <TextField
                     label="password"
