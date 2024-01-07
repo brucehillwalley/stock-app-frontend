@@ -11,6 +11,7 @@ const useAuthCalls = () => {
         userInfo
       );
       toastSuccessNotify("Login işlemi başarılı");
+      navigate("/stock")
       console.log(data);
     } catch (error) {
       toastErrorNotify("Login işlemi başarısız oldu");
