@@ -10,9 +10,14 @@ import TextField from "@mui/material/TextField";
 import { Button } from "@mui/material";
 import { Formik, Form } from "formik";
 import { object, string } from "yup";
-import { login } from "../service/authApiCall";
+import useAuthCalls  from "../service/useAuthCalls";
 
 const Login = () => {
+
+  const {login}=useAuthCalls()
+
+
+
   const loginSchema = object({
     email: string()
       .email("Lütfen geçerli bir email giriniz")
