@@ -1,32 +1,46 @@
 import axios from "axios";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 import { useNavigate } from "react-router-dom";
-import { fetchFail, fetchStart, loginSucces } from "../features/authSlice";
-import { useDispatch } from "react-redux";
+import { fetchFail, fetchStart, loginSuccess, logoutSuccess } from "../features/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const useAuthCalls = () => {
   const navigate = useNavigate();
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
+  const {token}=useSelector((state)=>state.auth)
+
   const login = async (userInfo) => {
-    dispatch(fetchStart())
+    dispatch(fetchStart());
     try {
       const { data } = await axios.post(
         `${process.env.REACT_APP_BASE_URL}/auth/login/`,
         userInfo
       );
-      dispatch(loginSucces(data))
+      dispatch(loginSuccess(data));
       toastSuccessNotify("Login işlemi başarılı");
-      navigate("/stock")
-      
+      navigate("/stock");
     } catch (error) {
-      dispatch(fetchFail())
+      dispatch(fetchFail());
       toastErrorNotify("Login işlemi başarısız oldu");
       console.log(error);
     }
   };
 
-  const register =async ()=>{}
-  const logout =async ()=>{}
+  const register = async () => {};
+    const logout = async () => {
+    dispatch(fetchStart())
+    try {
+      await axios.get(`${process.env.REACT_APP_BASE_URL}/auth/logout`, {
+        headers: { Authorization: `Token ${token}` },
+      })
+      toastSuccessNotify("Çıkış işlemi başarili.")
+      dispatch(logoutSuccess())
+      // navigate("/")
+    } catch (error) {
+      dispatch(fetchFail())
+      toastErrorNotify("Çıkış işlemi başarisiz oldu.")
+    }
+  }
   return { login, register, logout };
 };
 
