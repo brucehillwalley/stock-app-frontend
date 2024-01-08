@@ -1,8 +1,8 @@
 import axios from "axios";
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 import { useNavigate } from "react-router-dom";
-import { fetchFail, fetchStart, loginSucces } from "../features/authSlice";
-import { useDispatch } from "react-redux";
+import { fetchFail, fetchStart, loginSuccess } from "../features/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const useAuthCalls = () => {
   const navigate = useNavigate();
