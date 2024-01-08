@@ -16,13 +16,24 @@ const authSlice = createSlice({
       state.loading=true
 
     },
+<<<<<<< HEAD
     loginSuccess:(state, {payload})=>{
       state.loading=false
       state.user=payload.user.username
       state.token=payload.token
+=======
+    loginSuccess:(state, {payload})=>{
+      state.loading = false
+      state.user = payload.user.username
+      state.token = payload.token
+>>>>>>> register-validation
 
     },
-    registerSuccess:()=>{},
+    registerSuccess:(state, { payload })=>{
+      state.loading = false
+      state.user = payload.data.username
+      state.token = payload.token
+    },
     fetchFail:(state)=>{
         state.loading=false
         state.error=true
@@ -36,5 +47,9 @@ const authSlice = createSlice({
   },
 })
 
+<<<<<<< HEAD
 export const {fetchFail,fetchStart,loginSuccess,logoutSuccess} = authSlice.actions
+=======
+export const {fetchFail,fetchStart,loginSuccess,registerSuccess} = authSlice.actions
+>>>>>>> register-validation
 export default authSlice.reducer
