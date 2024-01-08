@@ -25,7 +25,13 @@ const useAuthCalls = () => {
     }
   };
 
-  const register =async ()=>{}
+  const register =async ()=>{
+
+
+
+
+    
+  }
   const logout =async ()=>{}
   return { login, register, logout };
 };

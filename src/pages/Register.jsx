@@ -7,11 +7,14 @@ import Grid from "@mui/material/Grid"
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import { Link, useNavigate } from "react-router-dom"
+import { Formik } from "formik"
 
 import TextField from "@mui/material/TextField"
+import useAuthCalls from "../service/useAuthCalls"
+import { registerSchema } from "../components/RegisterForm"
 
 const Register = () => {
-  const navigate = useNavigate()
+  const {register} = useAuthCalls()
 
   return (
     <Container maxWidth="lg">
@@ -50,6 +53,19 @@ const Register = () => {
           >
             Register
           </Typography>
+
+          <Formik
+          initialValues={{
+"username": "",
+"password": "",
+"email": "",
+"firstName": "",
+"lastName": ""
+}}
+validationSchema={registerSchema}
+          >
+
+          </Formik>
 
           <Box
             component="form"
