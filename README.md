@@ -1,3 +1,5 @@
+## `Canlı`
+(https://stockk-app.netlify.app/)
 ## `Kurulum`
 
 ```
