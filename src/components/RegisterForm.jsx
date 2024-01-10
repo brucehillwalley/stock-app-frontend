@@ -5,7 +5,7 @@ import { Form } from "formik"
 import { object, string } from "yup"
 
 export const registerSchema = object({
-    username: string()
+  username: string()
     .max(20, "Kullanıcı adı 10 karakterden az olmalıdır.")
     .required("Kullanıcı adı zorunludur"),
   firstName: string()
@@ -28,11 +28,13 @@ export const registerSchema = object({
     .matches(/[!/[@$!%*?&]+/, "Şifre bir özel karakter içermelidir"),
 })
 
-const RegisterForm = ({ values,
-    handleChange,
-    errors,
-    touched,
-    handleBlur,}) => {
+const RegisterForm = ({
+  values,
+  handleChange,
+  errors,
+  touched,
+  handleBlur,
+}) => {
   return (
     <Form>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>

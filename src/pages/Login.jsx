@@ -1,37 +1,36 @@
-import Avatar from "@mui/material/Avatar";
-import Container from "@mui/material/Container";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import LockIcon from "@mui/icons-material/Lock";
-import image from "../assets/result.svg";
-import { Link } from "react-router-dom";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import { Button } from "@mui/material";
-import { Formik, Form } from "formik";
-import { object, string } from "yup";
-import useAuthCalls  from "../service/useAuthCalls";
+import Avatar from "@mui/material/Avatar"
+import Container from "@mui/material/Container"
+import Grid from "@mui/material/Grid"
+import Typography from "@mui/material/Typography"
+import LockIcon from "@mui/icons-material/Lock"
+import image from "../assets/result.svg"
+import { Link } from "react-router-dom"
+import Box from "@mui/material/Box"
+import TextField from "@mui/material/TextField"
+import { Button } from "@mui/material"
+import { Formik, Form } from "formik"
+import { object, string } from "yup"
+import useAuthCalls from "../service/useAuthCalls"
 
 const Login = () => {
-
-  const {login}=useAuthCalls()
-
-
+  const { login } = useAuthCalls()
 
   const loginSchema = object({
     email: string()
       .email("Lütfen geçerli bir email giriniz")
       .required("Email girişi zorunludur"),
     password: string()
-      .required("Şifre girişi zorunludur")
-      .min(8, "Şifre en az 8 karekter içermelidir")
-      .max(16, "Şifre en fazla 16 karekter içermelidir")
+      .required("Şifre zorunludur.")
+      .min(8, "Şifre en az 8 karakter içermelidir")
+      .max(16, "Şifre en falza 16 karakter içermelidir")
       .matches(/\d+/, "Şifre en az bir rakam içermelidir")
       .matches(/[a-z]/, "Şifre en az bir küçük harf içermelidir")
-      .matches(/[A-Z]/,"Şifre en az bir büyük harf içermelidir")
-      .matches(/[@$!%*?&]/, "Şifre en az bir özel karekter (@$!%*?&) içermelidir" ),
-  });
-
+      .matches(/[A-Z]/, "Şifre en az bir büyük harf içermelidir")
+      .matches(
+        /[@$!%*?&]+/,
+        "Şifre en az bir özel karakter (@$!%*?&) içermelidir"
+      ),
+  })
   return (
     <Container maxWidth="lg">
       <Grid
@@ -73,20 +72,16 @@ const Login = () => {
             initialValues={{ email: "", password: "" }}
             validationSchema={loginSchema}
             onSubmit={(values, actions) => {
-              // TODO login(post) isteği
+              //TODO login(post) istegi
               login(values)
-
-              actions.resetForm();
-              actions.setSubmitting(); //? isSubmitting
-
-              //? veriler global state e aktarılabilir
-              //?navigasyon yapılabilir
-              //? toast yapılabilir
+              actions.resetForm()
+              actions.setSubmitting(false) //? isSubmitting
+              //? veriler global state'e aktırlabilir
+              //? navigasyon yapılabilir
+              //? tost yapılabilr
             }}
-
-            // component={} //? bu şekilde de yapılabilir
           >
-            {({ values, handleChange, touched, errors, handleBlur }) => (
+            {({ handleChange, values, touched, errors, handleBlur }) => (
               <Form>
                 <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
                   <TextField
@@ -113,9 +108,6 @@ const Login = () => {
                     error={touched.password && Boolean(errors.password)}
                     helperText={errors.password}
                   />
-                  {/* error ve helperText propertyleri Textfield componentine ait propertyler. */}
-                  {/* // mui textfield kullanmadığımzda hata mesajını göstermek için  */}
-                  {/* <span>{touched.username && errors.username}</span> */}
                   <Button variant="contained" type="submit">
                     Submit
                   </Button>
@@ -136,7 +128,7 @@ const Login = () => {
         </Grid>
       </Grid>
     </Container>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

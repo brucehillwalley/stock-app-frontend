@@ -1,18 +1,17 @@
-import Container from "@mui/material/Container";
-import Typography from "@mui/material/Typography";
-import Avatar from "@mui/material/Avatar";
-import LockIcon from "@mui/icons-material/Lock";
-import image from "../assets/result.svg";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
-
-import { Link} from "react-router-dom";
-import { Formik } from "formik";
-import useAuthCalls from "../service/useAuthCalls";
-import RegisterForm, { registerSchema } from "../components/RegisterForm";
+import Container from "@mui/material/Container"
+import Typography from "@mui/material/Typography"
+import Avatar from "@mui/material/Avatar"
+import LockIcon from "@mui/icons-material/Lock"
+import image from "../assets/result.svg"
+import Grid from "@mui/material/Grid"
+import Box from "@mui/material/Box"
+import { Link } from "react-router-dom"
+import RegisterForm, { registerSchema } from "../components/RegisterForm"
+import { Formik } from "formik"
+import useAuthCalls from "../service/useAuthCalls"
 
 const Register = () => {
-  const { register } = useAuthCalls();
+  const { register } = useAuthCalls()
 
   return (
     <Container maxWidth="lg">
@@ -55,21 +54,19 @@ const Register = () => {
           <Formik
             initialValues={{
               username: "",
-              password: "",
-              email: "",
               firstName: "",
               lastName: "",
+              email: "",
+              password: "",
             }}
             validationSchema={registerSchema}
             onSubmit={(values, actions) => {
-              register(values);
-              actions.resetForm();
-              actions.setSubmitting(false);
+              register(values)
+              actions.resetForm()
+              actions.setSubmitting(false)
             }}
             component={(props) => <RegisterForm {...props} />}
           ></Formik>
-
-         
 
           <Box sx={{ textAlign: "center", mt: 2 }}>
             <Link to="/">Do you have an account?</Link>
@@ -83,7 +80,7 @@ const Register = () => {
         </Grid>
       </Grid>
     </Container>
-  );
-};
+  )
+}
 
-export default Register;
+export default Register
