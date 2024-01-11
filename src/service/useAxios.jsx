@@ -10,8 +10,14 @@ const useAxios = () => {
       Authorization: `Token ${token}`,
     },
   });
+  const axiosPublic = axios.create({
+    baseURL: process.env.REACT_APP_BASE_URL,
+   
+  });
 
-  return { axiosWithToken };
+
+
+  return { axiosWithToken, axiosPublic };
 };
 
 export default useAxios;
