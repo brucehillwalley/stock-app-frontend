@@ -1,11 +1,11 @@
-import Box from "@mui/material/Box"
-import Button from "@mui/material/Button"
-import TextField from "@mui/material/TextField"
-import { Form } from "formik"
-import { object, string } from "yup"
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
+import { Form } from "formik";
+import { object, string } from "yup";
 
 export const registerSchema = object({
-    username: string()
+  username: string()
     .max(20, "Kullanıcı adı 10 karakterden az olmalıdır.")
     .required("Kullanıcı adı zorunludur"),
   firstName: string()
@@ -26,13 +26,15 @@ export const registerSchema = object({
     .matches(/[a-z]/, "Şifre bir küçük harf içermelidir")
     .matches(/[A-Z]/, "Şifre bir büyük harf içermelidir")
     .matches(/[!/[@$!%*?&]+/, "Şifre bir özel karakter içermelidir"),
-})
+});
 
-const RegisterForm = ({ values,
-    handleChange,
-    errors,
-    touched,
-    handleBlur,}) => {
+const RegisterForm = ({
+  values,
+  handleChange,
+  errors,
+  touched,
+  handleBlur,
+}) => {
   return (
     <Form>
       <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
@@ -101,7 +103,7 @@ const RegisterForm = ({ values,
         </Button>
       </Box>
     </Form>
-  )
-}
+  );
+};
 
-export default RegisterForm
+export default RegisterForm;
