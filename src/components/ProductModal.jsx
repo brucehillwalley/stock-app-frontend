@@ -1,4 +1,3 @@
-// import { useState } from "react"
 import Box from "@mui/material/Box"
 import Button from "@mui/material/Button"
 import TextField from "@mui/material/TextField"
@@ -10,8 +9,6 @@ export default function FirmModal({ open, handleClose, info, setInfo }) {
   const { postStock, putStock } = useStockCalls()
 
   const handleChange = (e) => {
-    // const { name, value } = e.target
-    // setInfo({ ...info, [name]: value })
     setInfo({ ...info, [e.target.name]: e.target.value })
   }
 
@@ -23,7 +20,6 @@ export default function FirmModal({ open, handleClose, info, setInfo }) {
     } else {
       postStock("firms", info)
     }
-
     handleClose()
   }
 
