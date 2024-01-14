@@ -3,9 +3,10 @@ import { useEffect } from "react";
 import useStockCalls from "../service/useStockCalls";
 
 const Firms = () => {
-  const { getFirms } = useStockCalls();
+  const { getFirms, getSales } = useStockCalls();
   useEffect(() => {
     getFirms();
+    getSales();
   }, []);
 
   return (
