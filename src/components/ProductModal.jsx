@@ -4,22 +4,23 @@ import TextField from "@mui/material/TextField"
 import Modal from "@mui/material/Modal"
 import { modalStyle } from "../styles/globalStyles"
 import useStockCalls from "../service/useStockCalls"
+import InputLabel from "@mui/material/InputLabel"
+import MenuItem from "@mui/material/MenuItem"
+import FormControl from "@mui/material/FormControl"
+import Select from "@mui/material/Select"
+import { useSelector } from "react-redux"
 
-export default function FirmModal({ open, handleClose, info, setInfo }) {
-  const { postStock, putStock } = useStockCalls()
+export default function ProductModal({ open, handleClose, info, setInfo }) {
+  const { postStock } = useStockCalls()
+  const { categories, brands } = useSelector((state) => state.stock)
 
   const handleChange = (e) => {
     setInfo({ ...info, [e.target.name]: e.target.value })
   }
 
-  console.log(info)
   const handleSubmit = (e) => {
     e.preventDefault()
-    if (info._id) {
-      putStock("firms", info)
-    } else {
-      postStock("firms", info)
-    }
+    postStock("products", info)
     handleClose()
   }
 
@@ -38,8 +39,44 @@ export default function FirmModal({ open, handleClose, info, setInfo }) {
             component="form"
             onSubmit={handleSubmit}
           >
+            <FormControl fullWidth>
+              <InputLabel id="categoryId">Category</InputLabel>
+              <Select
+                labelId="categoryId"
+                id="categoryId"
+                name="categoryId"
+                value={info.categoryId}
+                label="Category"
+                onChange={handleChange}
+              >
+                {categories.map((item) => (
+                  <MenuItem key={item._id} value={item._id}>
+                    {item.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            <FormControl fullWidth>
+              <InputLabel id="brandId">Brand</InputLabel>
+              <Select
+                labelId="brandId"
+                id="brandId"
+                name="brandId"
+                value={info.brandId}
+                label="Brand"
+                onChange={handleChange}
+              >
+                {brands.map((item) => (
+                  <MenuItem key={item._id} value={item._id}>
+                    {item.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
             <TextField
-              label="Firm Name"
+              label="Product Name"
               name="name"
               id="name"
               type="text"
@@ -48,38 +85,8 @@ export default function FirmModal({ open, handleClose, info, setInfo }) {
               onChange={handleChange}
               required
             />
-            <TextField
-              label="Phone"
-              name="phone"
-              id="phone"
-              type="tel"
-              variant="outlined"
-              value={info.phone}
-              onChange={handleChange}
-              required
-            />
-            <TextField
-              label="Address"
-              name="address"
-              id="address"
-              type="text"
-              variant="outlined"
-              value={info.address}
-              onChange={handleChange}
-              required
-            />
-            <TextField
-              label="Image"
-              name="image"
-              id="image"
-              type="url"
-              variant="outlined"
-              value={info.image}
-              onChange={handleChange}
-              required
-            />
             <Button type="submit" variant="contained" size="large">
-              {info._id ? "Update Firm" : "Add Firm"}
+              Add Product
             </Button>
           </Box>
         </Box>
