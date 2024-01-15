@@ -33,6 +33,11 @@ const stockSlice = createSlice({
       state[payload.url]=payload.apiData
       state.loading=false
     }, 
+    //! aşağıdaki gibi destructuring ile yapabiliriz
+    // getStockSuccess: (state, { payload:{apiData,url} }) => {
+    //   state.loading = false
+    //   state[url] = apiData
+    // },
      fetchFail:(state)=>{
       state.loading=false
       state.error=true
