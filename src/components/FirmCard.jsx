@@ -8,11 +8,14 @@ import Typography from "@mui/material/Typography";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import EditIcon from "@mui/icons-material/Edit";
 import { iconStyle } from "../styles/globalStyles";
+import useStockCalls from "../service/useStockCalls";
 
 
 
 export default function FirmCard({ firm }) {
   const { address, name, image, phone, _id } = firm;
+
+  const { deleteStock } = useStockCalls();
   return (
     <Card
       sx={{
@@ -40,7 +43,7 @@ export default function FirmCard({ firm }) {
       </Typography>
 
       <CardActions>
-        <DeleteOutlineIcon sx={iconStyle}  />
+        <DeleteOutlineIcon sx={iconStyle} onClick={() => deleteStock("firms",_id)} />
         <EditIcon sx={iconStyle} />
       </CardActions>
     </Card>
