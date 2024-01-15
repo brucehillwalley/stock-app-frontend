@@ -41,7 +41,7 @@ const useStockCalls = () => {
   const deleteStock = async (url = "firms", id) => {
     dispatch(fetchStart());
     try {
-      const { data } = await axiosWithToken.delete(`/${url}/${id}`);
+     await axiosWithToken.delete(`/${url}/${id}`);
       //! await ve delete yazmayı unutmayın
      
       toastSuccessNotify(`${url} bilgisi silinmiştir.`);
