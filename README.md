@@ -1,5 +1,5 @@
-## `Canlı`
-(https://stockk-app.netlify.app/)
+## `Live`
+[You can see project here](https://stockk-app.netlify.app/)
 ## `Kurulum`
 
 ```
