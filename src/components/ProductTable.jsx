@@ -27,7 +27,7 @@ export default function ProductTable() {
       headerAlign: "center",
       align: "center",
       valueGetter: (props) => {
-        console.log(props)
+        // console.log(props)
         return props.row?.categoryId?.name
       },
     },
@@ -69,7 +69,7 @@ export default function ProductTable() {
     },
   ]
 
-  console.log(products)
+  // console.log(products)
   return (
     <Box sx={{ width: "100%" }}>
       <DataGrid
@@ -80,7 +80,7 @@ export default function ProductTable() {
         checkboxSelection
         disableRowSelectionOnClick
         getRowId={getRowId}
-        slots={{ toolbar: GridToolbar }} 
+        slots={{ toolbar: GridToolbar }}
       />
     </Box>
   )

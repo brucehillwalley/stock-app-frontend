@@ -6,8 +6,11 @@ import { useSelector } from "react-redux"
 import { Grid } from "@mui/material"
 import FirmCard from "../components/FirmCard"
 import FirmModal from "../components/FirmModal"
-import TableSkeleton, { ErrorMsg, NoDataMsg } from "../components/DataFetchMsg"
-import ProductTable from "../components/ProductTable"
+import TableSkeleton, {
+  CardSkeleton,
+  ErrorMsg,
+  NoDataMsg,
+} from "../components/DataFetchMsg"
 
 const Firms = () => {
   // const { getFirms, getSales } = useStockCalls()
@@ -33,8 +36,6 @@ const Firms = () => {
     getStocks("firms")
   }, [])
 
-  console.log(firms)
-
   return (
     <div>
       <Typography variant="h4" color="error" mb={3}>
@@ -50,22 +51,25 @@ const Firms = () => {
         info={info}
         setInfo={setInfo}
       />
-   {error && <ErrorMsg />}
 
-{loading && <TableSkeleton />}
+      {error && <ErrorMsg />}
+      {loading && (
+        <CardSkeleton>
+          <FirmCard />
+        </CardSkeleton>
+      )}
 
-{!error && !loading && !firms.length && <NoDataMsg />}
+      {!error && !loading && !firms.length && <NoDataMsg />}
 
-{!error && !loading && firms.length>0 && <ProductTable />}
-
-
-      <Grid container gap={2} mt={3} justifyContent={"center"}>
-        {firms?.map((firm) => (
-          <Grid item key={firm._id}>
-            <FirmCard firm={firm} handleOpen={handleOpen} setInfo={setInfo} />
-          </Grid>
-        ))}
-      </Grid>
+      {!loading && !error && firms.length > 0 && (
+        <Grid container gap={2} mt={3} justifyContent={"center"}>
+          {firms?.map((firm) => (
+            <Grid item key={firm._id}>
+              <FirmCard firm={firm} handleOpen={handleOpen} setInfo={setInfo} />
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </div>
   )
 }
