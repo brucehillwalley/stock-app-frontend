@@ -1,19 +1,12 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { modalStyle } from "../styles/globalStyles";
 import { TextField } from "@mui/material";
-import { useState } from "react";
+import useStockCalls from "../service/useStockCalls";
 
-export default function FirmModal({ open, handleClose }) {
-  const initialState = {
-    name: "",
-    phone: "",
-    address: "",
-    image: "",
-  };
-  const [info, setInfo] = useState({ initialState });
+export default function FirmModal({ open, handleClose, info, setInfo }) {
+  const { postStock } = useStockCalls();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,6 +16,14 @@ export default function FirmModal({ open, handleClose }) {
       [name]: value,
       //   [e.target.name]: e.target.value,
     });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    postStock("firms", info);
+
+    handleClose();
   };
 
   console.log(info);
@@ -35,7 +36,11 @@ export default function FirmModal({ open, handleClose }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={modalStyle}>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+          <Box
+            sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+            component="form"
+            onSubmit={handleSubmit}
+          >
             <TextField
               label="Firm name"
               name="name"
@@ -44,6 +49,7 @@ export default function FirmModal({ open, handleClose }) {
               variant="outlined"
               value={info.name}
               onChange={handleChange}
+              required
             />
             <TextField
               label="Phone"
@@ -53,6 +59,7 @@ export default function FirmModal({ open, handleClose }) {
               variant="outlined"
               value={info.phone}
               onChange={handleChange}
+              required
             />
 
             <TextField
@@ -63,6 +70,7 @@ export default function FirmModal({ open, handleClose }) {
               variant="outlined"
               value={info.address}
               onChange={handleChange}
+              required
             />
             <TextField
               label="Image"
@@ -72,6 +80,7 @@ export default function FirmModal({ open, handleClose }) {
               variant="outlined"
               value={info.image}
               onChange={handleChange}
+              required
             />
 
             <Button variant="contained" type="submit">

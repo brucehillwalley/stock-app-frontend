@@ -51,8 +51,23 @@ const useStockCalls = () => {
       toastErrorNotify(`${url} silinemedi.`);
     }
   };
+  const postStock = async (url = "firms", info) => {
+    dispatch(fetchStart());
+    try {
+     await axiosWithToken.post(`/${url}`, info);
+      //! await ve delete yazmayı unutmayın
+     
+      toastSuccessNotify(`${url} kaydı eklenmiştir.`);
+      
+      //! global state i güncelleme
+      getStocks(url);
+    } catch (error) {
+      dispatch(fetchFail());
+      toastErrorNotify(`${url} kaydı eklenememiştir.`);
+    }
+  };
 
-  return { getStocks, deleteStock };
+  return { getStocks, deleteStock ,postStock};
 };
 
 export default useStockCalls;

@@ -6,9 +6,18 @@ import FirmCard from "../components/FirmCard";
 import FirmModal from "../components/FirmModal";
 
 const Firms = () => {
+  const initialState = {
+    name: "",
+    phone: "",
+    address: "",
+    image: "",
+  };
+  const [info, setInfo] = useState({ initialState });
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {
+    setInfo(initialState)
+    setOpen(false)};
   // const { getFirms, getSales } = useStockCalls();
   const { getStocks } = useStockCalls();
   const { firms } = useSelector((state) => state.stock);
@@ -26,7 +35,9 @@ const Firms = () => {
       <Button variant="contained" onClick={handleOpen}>New Firm</Button>
       
 
-      <FirmModal open={open} handleClose={handleClose}/>
+      <FirmModal open={open} handleClose={handleClose} info={info}
+      setInfo={setInfo} 
+      />
 
       <Grid container gap={2} mt={3} justifyContent={"center"}>
      {firms?.map((firm)=>(
