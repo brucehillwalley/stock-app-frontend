@@ -1,0 +1,81 @@
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Modal from "@mui/material/Modal";
+import { modalStyle } from "../styles/globalStyles";
+import { TextField } from "@mui/material";
+import useStockCalls from "../service/useStockCalls";
+
+export default function BrandModal({ open, handleClose, info, setInfo }) {
+  const { postStock } = useStockCalls();
+  const { putStock } = useStockCalls();
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    //! target yani textfield name  API deki property ile eşleştirilmeli. Aynı ise id de kullanılabilirdi.
+    setInfo({
+      ...info,
+      [name]: value,
+      //   [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (info._id) {
+        putStock("brands",info._id,info);
+        }else {
+        postStock("brands",info);
+        }
+ 
+
+    handleClose();
+  };
+
+  console.log(info);
+  return (
+    <div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={modalStyle}>
+          <Box
+            sx={{ display: "flex", flexDirection: "column", gap: 2 }}
+            component="form"
+            onSubmit={handleSubmit}
+          >
+            <TextField
+              label="Firm name"
+              name="name"
+              id="name"
+              type="text"
+              variant="outlined"
+              value={info.name}
+              onChange={handleChange}
+              required
+            />
+        
+
+         
+            <TextField
+              label="Image"
+              name="image"
+              id="image"
+              type="url"
+              variant="outlined"
+              value={info.image}
+              onChange={handleChange}
+              required
+            />
+
+            <Button variant="contained" type="submit">
+              Submit
+            </Button>
+          </Box>
+        </Box>
+      </Modal>
+    </div>
+  );
+}

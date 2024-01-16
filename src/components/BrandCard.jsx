@@ -11,7 +11,7 @@ import useStockCalls from "../service/useStockCalls";
 
 
 
-export default function BrandCard({ brand }) {
+export default function BrandCard({ brand, handleOpen, info, setInfo }) {
   const {  name, image, _id } = brand;
 
   const { deleteStock } = useStockCalls();
@@ -39,7 +39,7 @@ export default function BrandCard({ brand }) {
 
       <CardActions>
         <DeleteOutlineIcon sx={iconStyle} onClick={() => deleteStock("brands",_id)} />
-        <EditIcon sx={iconStyle} />
+        <EditIcon sx={iconStyle} onClick={() => {handleOpen(); setInfo(brand)}} />
       </CardActions>
     </Card>
   );
