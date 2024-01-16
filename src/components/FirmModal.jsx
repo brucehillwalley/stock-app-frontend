@@ -22,7 +22,7 @@ export default function FirmModal({ open, handleClose, info, setInfo }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (info._id) {
-        putStock("firms",info._id,info);
+        putStock("firms",info);
         }else {
         postStock("firms",info);
         }

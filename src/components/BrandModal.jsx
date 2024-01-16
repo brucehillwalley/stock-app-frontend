@@ -22,11 +22,10 @@ export default function BrandModal({ open, handleClose, info, setInfo }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (info._id) {
-        putStock("brands",info._id,info);
-        }else {
-        postStock("brands",info);
-        }
- 
+      putStock("brands", info);
+    } else {
+      postStock("brands", info);
+    }
 
     handleClose();
   };
@@ -56,9 +55,7 @@ export default function BrandModal({ open, handleClose, info, setInfo }) {
               onChange={handleChange}
               required
             />
-        
 
-         
             <TextField
               label="Image"
               name="image"
