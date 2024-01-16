@@ -43,7 +43,10 @@ export default function FirmCard({ firm, info, setInfo,handleOpen }) {
 
       <CardActions>
         <DeleteOutlineIcon sx={iconStyle} onClick={() => deleteStock("firms",_id)} />
-        <EditIcon sx={iconStyle} onClick={handleOpen} />
+        <EditIcon sx={iconStyle} onClick={
+          (e)=>{ 
+            handleOpen()
+            setInfo(firm)}} />
       </CardActions>
     </Card>
   );
