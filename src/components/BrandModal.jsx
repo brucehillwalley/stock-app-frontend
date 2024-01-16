@@ -68,7 +68,7 @@ export default function BrandModal({ open, handleClose, info, setInfo }) {
             />
 
             <Button variant="contained" type="submit">
-              Submit
+              {!info._id ? "Add" : "Update"} Brand
             </Button>
           </Box>
         </Box>
