@@ -43,7 +43,7 @@ const Firms = () => {
      {firms?.map((firm)=>(
 
       <Grid item key={firm._id}>
-        <FirmCard firm={firm}/>
+        <FirmCard firm={firm} info={info} setInfo={setInfo} handleOpen={handleOpen}/>
       
       </Grid>
 

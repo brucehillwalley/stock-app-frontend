@@ -11,7 +11,7 @@ import useStockCalls from "../service/useStockCalls";
 
 
 
-export default function FirmCard({ firm }) {
+export default function FirmCard({ firm, info, setInfo,handleOpen }) {
   const { address, name, image, phone, _id } = firm;
 
   const { deleteStock } = useStockCalls();
@@ -43,7 +43,7 @@ export default function FirmCard({ firm }) {
 
       <CardActions>
         <DeleteOutlineIcon sx={iconStyle} onClick={() => deleteStock("firms",_id)} />
-        <EditIcon sx={iconStyle} />
+        <EditIcon sx={iconStyle} onClick={handleOpen} />
       </CardActions>
     </Card>
   );
