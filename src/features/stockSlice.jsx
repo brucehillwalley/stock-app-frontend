@@ -38,10 +38,10 @@ const stockSlice = createSlice({
     },
     getProPurBranFirmSuccess: (state, { payload }) => {
       state.loading = false
-      state.products = payload[0].data
-      state.purchases = payload[1].data
-      state.brands = payload[2].data
-      state.firms = payload[3].data
+      state.products = payload[0]
+      state.purchases = payload[1]
+      state.brands = payload[2]
+      state.firms = payload[3]
       state.error = false
     },
 

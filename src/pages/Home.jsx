@@ -1,5 +1,13 @@
+import Charts from "../components/Charts"
+import KPI from "../components/KPI"
+
 const Home = () => {
-  return <div>Home</div>
+  return (
+    <>
+      <KPI />
+      <Charts />
+    </>
+  )
 }
 
 export default Home
