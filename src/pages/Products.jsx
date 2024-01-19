@@ -25,6 +25,8 @@ const Products = () => {
 
   useEffect(() => {
     getStocks("products");
+    getStocks("categories");
+    getStocks("brands");
   }, []);
 
   console.log(products);
