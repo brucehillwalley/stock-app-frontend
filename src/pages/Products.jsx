@@ -6,22 +6,24 @@ import ProductModal from "../components/ProductModal";
 import ProductTable from "../components/ProductTable";
 
 const Products = () => {
+  const { getStocks } = useStockCalls();
+  const { products } = useSelector((state) => state.stock);
   const initialState = {
-    name: "",
-    phone: "",
-    address: "",
-    image: "",
+   
+"categoryId": "",
+"brandId": "",
+"name": ""
   };
   const [info, setInfo] = useState({ initialState });
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
+
   const handleClose = () => {
     setInfo(initialState);
     setOpen(false);
   };
 
-  const { getStocks } = useStockCalls();
-  const { products } = useSelector((state) => state.stock);
+ 
 
   useEffect(() => {
     getStocks("products");
