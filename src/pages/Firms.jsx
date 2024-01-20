@@ -1,4 +1,4 @@
-import { Button, Grid, Typography } from "@mui/material";
+import { Button, Grid, Skeleton, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import useStockCalls from "../service/useStockCalls";
 import { useSelector } from "react-redux";
@@ -44,7 +44,18 @@ const Firms = () => {
 
       {!error && !loading && !firms.length && <NoDataMsg/>}
 
-      {loading && [1,2,3,4].map((item)=><CardSkeleton> <FirmCard/> </CardSkeleton>) }
+      {/* {loading && [1,2,3,4].map((item)=><CardSkeleton> <FirmCard/> </CardSkeleton>) } */}
+      { loading && 
+   (
+      <Grid container gap={2} mt={3} justifyContent={"center"}>
+        {[...new Array(6)].map((_, index) => ( 
+          <Grid item key={index}>
+            <Skeleton  animation="wave" width={300} height={400} />
+          </Grid>
+        ))}
+      </Grid>
+    )
+  }
 
      {!loading && !error && firms.length > 0 && (<Grid container gap={2} mt={3} justifyContent={"center"}>
      {firms?.map((firm)=>(
