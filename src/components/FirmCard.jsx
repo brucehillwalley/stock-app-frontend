@@ -12,7 +12,7 @@ import useStockCalls from "../service/useStockCalls";
 
 
 export default function FirmCard({ firm, info, setInfo,handleOpen }) {
-  const { address, name, image, phone, _id } = firm;
+  // const { address, name, image, phone, _id } = firm;
 
   const { deleteStock } = useStockCalls();
   return (
@@ -30,19 +30,19 @@ export default function FirmCard({ firm, info, setInfo,handleOpen }) {
     >
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          {name}
+          {firm?.name}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          {address}
+          {firm?.address}
         </Typography>
       </CardContent>
-      <CardMedia component="img" alt={name} height="140" image={image} sx={{objectFit:"contain"}} />
+      <CardMedia component="img" alt={firm?.name} height="140" image={firm?.image} sx={{objectFit:"contain"}} />
       <Typography variant="body2" color="text.secondary">
-        {phone}
+        {firm?.phone}
       </Typography>
 
       <CardActions>
-        <DeleteOutlineIcon sx={iconStyle} onClick={() => deleteStock("firms",_id)} />
+        <DeleteOutlineIcon sx={iconStyle} onClick={() => deleteStock("firms",firm?._id)} />
         <EditIcon sx={iconStyle} onClick={
           (e)=>{ 
             handleOpen()
