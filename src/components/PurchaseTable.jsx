@@ -8,14 +8,9 @@ import { iconStyle } from "../styles/globalStyles"
 import useStockCalls from "../service/useStockCalls";
 
 
-
-
-
-
-
-
-export default function SaleTable({handleOpen, setInfo}) {
-  const {sales}=useSelector((state)=>state.stock)
+export default function PurchaseTable({handleOpen, setInfo}) {
+  
+  const {purchases}=useSelector((state)=>state.stock)
   const {deleteStock,putStock}=useStockCalls()
 
   const getRowId = (row) => row._id;
@@ -29,6 +24,16 @@ export default function SaleTable({handleOpen, setInfo}) {
       align: "center",
       renderCell: ({row})=> new Date(row.createdAt).toLocaleString("tr-TR")
 
+    },
+    {
+      field: "firmId",
+      headerName: "Firm",
+      flex: 1,
+      minWidth:100,
+      headerAlign: "center",
+      align: "center",
+      renderCell:({row})=>row?.firmId?.name
+     
     },
     {
       field: "brandId",
@@ -83,7 +88,7 @@ export default function SaleTable({handleOpen, setInfo}) {
       headerAlign: "center",
       minWidth:40,
       flex: 1,
-      renderCell:({row: {brandId, price, quantity, productId, _id}})=>{
+      renderCell:({row: {firmId,brandId, price, quantity, productId, _id}})=>{
         return [
           <GridActionsCellItem
           key="edit"
@@ -91,7 +96,7 @@ export default function SaleTable({handleOpen, setInfo}) {
           label="Edit"
           onClick={()=>{
               handleOpen()
-              setInfo({ brandId, price, quantity, productId, _id })
+              setInfo({ firmId, brandId, price, quantity, productId, _id })
           }}
           sx={iconStyle}
         />,
@@ -100,7 +105,7 @@ export default function SaleTable({handleOpen, setInfo}) {
           icon={<DeleteForeverIcon/>}
           label="Delete"
           onClick={()=>{
-            deleteStock("sales", _id)
+            deleteStock("purchases", _id)
           }}
           sx={iconStyle}
         />
@@ -115,7 +120,7 @@ export default function SaleTable({handleOpen, setInfo}) {
         getRowId={getRowId}
         autoHeight
         slots={{ toolbar: GridToolbar }}
-        rows={sales}
+        rows={purchases}
         columns={columns}
         pageSizeOptions={[5, 10, 20,50,100]} //? sayfa başına satır sayısı
       
