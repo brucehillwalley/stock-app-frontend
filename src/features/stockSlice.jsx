@@ -18,6 +18,7 @@ const stockSlice = createSlice({
   initialState,
   reducers: {
     fetchStart:(state)=>{
+      state.error=false
       state.loading=true
 
     }, 
@@ -33,6 +34,13 @@ const stockSlice = createSlice({
       state[payload.url]=payload.apiData
       state.loading=false
     }, 
+    getProPurBranFirmSuccess:(state, {payload})=>{
+     state.products=payload[0]
+     state.purchases=payload[1]
+     state.brands=payload[2]
+     state.firms=payload[3]
+     state.loading=false
+    }, 
     //! aşağıdaki gibi destructuring ile yapabiliriz
     // getStockSuccess: (state, { payload:{apiData,url} }) => {
     //   state.loading = false
@@ -47,6 +55,6 @@ const stockSlice = createSlice({
   }
 });
 
-export const {fetchStart,getStockSuccess,fetchFail} = stockSlice.actions
+export const {fetchStart,getStockSuccess,fetchFail,getProPurBranFirmSuccess} = stockSlice.actions
 
 export default stockSlice.reducer

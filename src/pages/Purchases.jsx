@@ -7,7 +7,7 @@ import PurchaseModal from "../components/PurchaseModal";
 import PurchaseTable from "../components/PurchaseTable";
 
 const Purchases = () => {
-  const { getStocks } = useStockCalls();
+  const { getStocks, getProPurBranFirm } = useStockCalls();
   const { purchases, error, loading } = useSelector((state) => state.stock);
 
   const initialState = {
@@ -31,10 +31,11 @@ price:""
  
 
   useEffect(() => {
-    getStocks("purchases");
-    getStocks("products");
-    getStocks("brands");
-    getStocks("firms");
+    // getStocks("purchases");
+    // getStocks("products");
+    // getStocks("brands");
+    // getStocks("firms");
+    getProPurBranFirm()
   }, []);
 
  

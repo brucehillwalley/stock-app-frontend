@@ -1,6 +1,11 @@
 import { toastErrorNotify, toastSuccessNotify } from "../helper/ToastNotify";
 import useAxios from "./useAxios";
-import { fetchFail, fetchStart, getStockSuccess } from "../features/stockSlice";
+import {
+  fetchFail,
+  fetchStart,
+  getProPurBranFirmSuccess,
+  getStockSuccess,
+} from "../features/stockSlice";
 import { useDispatch } from "react-redux";
 
 const useStockCalls = () => {
@@ -38,12 +43,36 @@ const useStockCalls = () => {
       toastErrorNotify(`${url} bilgileri listelenemedi.`);
     }
   };
+
+  const getProPurBranFirm = async () => {
+    dispatch(fetchStart());
+    try {
+      const [products, purchases, brands, firms] = await Promise.all([
+        axiosWithToken("/products/"),
+        axiosWithToken("/purchases/"),
+        axiosWithToken("/brands/"),
+        axiosWithToken("/firms/"),
+      ]);
+
+      dispatch(
+        getProPurBranFirmSuccess([
+          products?.data?.data,
+          purchases?.data?.data,
+          brands?.data?.data,
+          firms?.data?.data,
+        ])
+      );
+    } catch (error) {
+      dispatch(fetchFail());
+    }
+  };
+
   const deleteStock = async (url = "firms", id) => {
     dispatch(fetchStart());
     try {
-     await axiosWithToken.delete(`/${url}/${id}`);
+      await axiosWithToken.delete(`/${url}/${id}`);
       //! await ve delete yazmayı unutmayın
-     
+
       toastSuccessNotify(`${url} bilgisi silinmiştir.`);
       getStocks(url);
     } catch (error) {
@@ -54,11 +83,11 @@ const useStockCalls = () => {
   const postStock = async (url = "firms", info) => {
     dispatch(fetchStart());
     try {
-     await axiosWithToken.post(`/${url}`, info);
+      await axiosWithToken.post(`/${url}`, info);
       //! await ve post yazmayı unutmayın
-     
+
       toastSuccessNotify(`${url} kaydı eklenmiştir.`);
-      
+
       //! global state i güncelleme
       getStocks(url);
     } catch (error) {
@@ -66,12 +95,12 @@ const useStockCalls = () => {
       toastErrorNotify(`${url} kaydı eklenememiştir.`);
     }
   };
-  const putStock = async (url = "firms",info) => {
+  const putStock = async (url = "firms", info) => {
     dispatch(fetchStart());
     try {
-     await axiosWithToken.put(`/${url}/${info._id}`, info);
+      await axiosWithToken.put(`/${url}/${info._id}`, info);
       //! await ve putyazmayı unutmayın
-     
+
       toastSuccessNotify(`${url} kaydı güncellenmiştir.`);
 
       //! global state i güncelleme
@@ -82,7 +111,7 @@ const useStockCalls = () => {
     }
   };
 
-  return { getStocks, deleteStock ,postStock,putStock};
+  return { getStocks, deleteStock, postStock, putStock, getProPurBranFirm };
 };
 
 export default useStockCalls;
