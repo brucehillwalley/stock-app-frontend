@@ -46,13 +46,15 @@ const stockSlice = createSlice({
     //   state.loading = false
     //   state[url] = apiData
     // },
-    getStockPromiseSuccess:(state, {payload})=>{
-      state.products=payload[0]
-      state.purchases=payload[1]
-      state.brands=payload[2]
-      state.firms=payload[3]
-      state.loading=false
-    },
+
+    //!genel metod denemesi
+    // getStockPromiseSuccess:(state, {payload})=>{
+    //   state.products=payload[0]
+    //   state.purchases=payload[1]
+    //   state.brands=payload[2]
+    //   state.firms=payload[3]
+    //   state.loading=false
+    // },
      fetchFail:(state)=>{
       state.loading=false
       state.error=true
@@ -62,6 +64,6 @@ const stockSlice = createSlice({
   }
 });
 
-export const {fetchStart,getStockSuccess,fetchFail,getProPurBranFirmSuccess,getStockPromiseSuccess} = stockSlice.actions
+export const {fetchStart,getStockSuccess,fetchFail,getProPurBranFirmSuccess} = stockSlice.actions
 
 export default stockSlice.reducer
