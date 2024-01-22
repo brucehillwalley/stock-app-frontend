@@ -46,9 +46,12 @@ const stockSlice = createSlice({
 
     //!genel metod denemesi
     getStockPromiseSuccess: (state, { payload }) => {
-      for (let i = 0; i < payload.length; i++) {
-        state[payload[i].name] = payload[i].data;
-      }
+      // for (let i = 0; i < payload.length; i++) {
+      //   state[payload[i].name] = payload[i].data;
+      // }
+      payload.map(
+        (_, index) => (state[payload[index].name] = payload[index].data)
+      );
 
       state.loading = false;
     },
@@ -64,7 +67,7 @@ export const {
   getStockSuccess,
   fetchFail,
   getProPurBranFirmSuccess,
-  getStockPromiseSuccess
+  getStockPromiseSuccess,
 } = stockSlice.actions;
 
 export default stockSlice.reducer;

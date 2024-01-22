@@ -7,7 +7,7 @@ import SaleModal from "../components/SaleModal";
 import SaleTable from "../components/SaleTable";
 
 const Sales = () => {
-  const { getStocks } = useStockCalls();
+  const { getStockPromise } = useStockCalls();
   const { sales, error, loading } = useSelector((state) => state.stock);
 
   const initialState = {
@@ -30,9 +30,10 @@ price:""
  
 
   useEffect(() => {
-    getStocks("sales");
-    getStocks("products");
-    getStocks("brands");
+    // getStocks("sales");
+    // getStocks("products");
+    // getStocks("brands");
+    getStockPromise(["sales","products","brands"])
   }, []);
 
  

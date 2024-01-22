@@ -24,7 +24,7 @@ const Firms = () => {
   const { firms, error, loading} = useSelector((state) => state.stock);
   useEffect(() => {
     // getFirms();
-    // getSales();
+    
     getStocks("firms");
   }, []);
   console.log(firms);
