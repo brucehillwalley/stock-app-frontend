@@ -5,9 +5,10 @@ import { useSelector } from "react-redux";
 import ProductModal from "../components/ProductModal";
 import ProductTable from "../components/ProductTable";
 import TableSkeleton, { ErrorMsg, NoDataMsg } from "../components/DataFetchMsg";
+import { getStockPromiseSuccess } from "../features/stockSlice";
 
 const Products = () => {
-  const { getStocks } = useStockCalls();
+  const { getStocks,getStockPromise } = useStockCalls();
   const { products, error, loading } = useSelector((state) => state.stock);
   const initialState = {
    
@@ -27,9 +28,11 @@ const Products = () => {
  
 
   useEffect(() => {
-    getStocks("products");
-    getStocks("categories");
-    getStocks("brands");
+    // getStocks("products");
+    // getStocks("categories");
+    // getStocks("brands");
+
+    getStockPromise(["products","categories","brands"])
   }, []);
 
   console.log(products);

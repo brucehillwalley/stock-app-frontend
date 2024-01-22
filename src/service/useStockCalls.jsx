@@ -72,29 +72,20 @@ const useStockCalls = () => {
   //! getStockPromise i getProPurBranFirm yerine genel bir metod yapma çalışmaları.
   const getStockPromise = async (stocks) => {
     dispatch(fetchStart());
-    let promiseString = "";
-
-    for (let i = 0; i < stocks.length; i++) {
-      promiseString = promiseString + `axiosWithToken("/${stocks[i]}/"),`;
-    }
-    const a = `await Promise.all([${promiseString}])`;
-    console.log(promiseString);
     try {
-      let promiseResults = eval(a);
-      console.log(promiseResults);
-      dispatch(
-        getStockPromiseSuccess([
-          { name: stocks[0], data: promiseResults[0]?.data?.data },
-          { name: stocks[1], data: promiseResults[1]?.data?.data },
-          { name: stocks[2], data: promiseResults[2]?.data?.data },
-          { name: stocks[3], data: promiseResults[3]?.data?.data },
-        ])
-      );
+      const promises = stocks.map((stock) => axiosWithToken(`/${stock}/`));
+      console.log(promises);
+      const promiseResults = await Promise.all(promises);
+      // console.log(promiseResults);
+      const stockData = promiseResults.map((result, index) => ({
+        name: stocks[index],
+        data: result?.data?.data,
+      }));
+      dispatch(getStockPromiseSuccess(stockData));
     } catch (error) {
       dispatch(fetchFail());
     }
   };
-
   const deleteStock = async (url = "firms", id) => {
     dispatch(fetchStart());
     try {
