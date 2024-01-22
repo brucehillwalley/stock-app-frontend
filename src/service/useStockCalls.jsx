@@ -5,6 +5,7 @@ import {
   fetchStart,
   getProPurBranFirmSuccess,
   getStockSuccess,
+  getStockPromiseSuccess
 } from "../features/stockSlice";
 import { useDispatch } from "react-redux";
 
@@ -66,6 +67,40 @@ const useStockCalls = () => {
       dispatch(fetchFail());
     }
   };
+
+
+  //! getStockPromise i getProPurBranFirm yerine genel bir metod yapma çalışmaları. 
+  // const getStockPromise=async(stocks)=>{
+  //   dispatch(fetchStart());
+  //   try {
+
+
+  //     for (let i = 0; i < stocks.length; i++) {
+       
+  //   }
+
+  //    const promiseResults = await Promise.all([
+  //     axiosWithToken(`${stocks[0]}`),
+  //     axiosWithToken(`${stocks[1]}`),
+  //     axiosWithToken(`${stocks[2]}`),
+  //     axiosWithToken(`${stocks[3]}`),
+    
+  //   ])
+
+  //     dispatch(
+  //       getStockPromiseSuccess([
+  //         promiseResults[0]?.data?.data,
+  //         promiseResults[1]?.data?.data,
+  //         promiseResults[2]?.data?.data,
+  //         promiseResults[3]?.data?.data,
+         
+  //       ])
+  //     );
+  //   } catch (error) {
+  //     dispatch(fetchFail());
+  //   }
+
+  // }
 
   const deleteStock = async (url = "firms", id) => {
     dispatch(fetchStart());
