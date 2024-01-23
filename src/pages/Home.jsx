@@ -1,5 +1,13 @@
-const Home = () => {
-  return <div>Home</div>
-}
+import Charts from "../components/Charts";
+import KPI from "../components/KPI";
 
-export default Home
+const Home = () => {
+  return (
+    <>
+      <KPI />
+      <Charts />
+    </>
+  );
+};
+
+export default Home;

@@ -1,0 +1,76 @@
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import PaymentsIcon from "@mui/icons-material/Payments";
+import { amber, deepPurple, pink } from "@mui/material/colors";
+import { Avatar, Box, Paper, Stack, Typography } from "@mui/material";
+
+const kpiData = [
+  {
+    id: 1,
+    title: "sales",
+    amount: "$16900",
+    icon: <MonetizationOnIcon sx={{ fontSize: "3rem" }} />,
+    bgColor: deepPurple[100],
+    color: deepPurple[700],
+  },
+  {
+    id: 2,
+    title: "profit",
+    amount: "$16900",
+    icon: <ShoppingCartIcon sx={{ fontSize: "3rem" }} />,
+    bgColor: pink[100],
+    color: pink[700],
+  },
+  {
+    id: 3,
+    title: "purchases",
+    amount: "$16900",
+    icon: <PaymentsIcon sx={{ fontSize: "3rem" }} />,
+    bgColor: amber[100],
+    color: amber[700],
+  },
+];
+
+const KPI = () => {
+  return (
+    <Stack
+      justifyContent="center"
+      alignItems="center"
+      gap={2}
+      flexWrap="wrap"
+      direction="row"
+    >
+      {kpiData.map((item) => (
+        <Paper
+          key={item.id}
+          elevation={10}
+          sx={{
+            display: "flex",
+            p: 2,
+            gap: 2,
+            width: "250px",
+            alignItems: "center",
+            justifyContent:"center"
+          }}
+        >
+          <Avatar
+            sx={{
+              bgcolor: item.bgColor,
+              color: item.color,
+              width: "100px",
+              height: "100px",
+            }}
+          >
+            {item.icon}
+          </Avatar>
+          <Box>
+            <Typography variant="button">{item.title}</Typography>
+            <Typography variant="h5">{item.amount}</Typography>
+          </Box>
+        </Paper>
+      ))}
+    </Stack>
+  );
+};
+
+export default KPI;
