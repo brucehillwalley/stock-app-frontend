@@ -3,35 +3,41 @@ import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import PaymentsIcon from "@mui/icons-material/Payments";
 import { amber, deepPurple, pink } from "@mui/material/colors";
 import { Avatar, Box, Paper, Stack, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
 
-const kpiData = [
-  {
-    id: 1,
-    title: "sales",
-    amount: "$16900",
-    icon: <MonetizationOnIcon sx={{ fontSize: "3rem" }} />,
-    bgColor: deepPurple[100],
-    color: deepPurple[700],
-  },
-  {
-    id: 2,
-    title: "profit",
-    amount: "$16900",
-    icon: <ShoppingCartIcon sx={{ fontSize: "3rem" }} />,
-    bgColor: pink[100],
-    color: pink[700],
-  },
-  {
-    id: 3,
-    title: "purchases",
-    amount: "$16900",
-    icon: <PaymentsIcon sx={{ fontSize: "3rem" }} />,
-    bgColor: amber[100],
-    color: amber[700],
-  },
-];
+
 
 const KPI = () => {
+    const {sales,purchases}=useSelector((state)=>state.stock)
+
+    const totalSales=sales?.reduce((acc,item)=>acc+item.amount,0)
+    const totalPurchases=purchases?.reduce((acc,item)=>acc+item.amount,0)
+    const kpiData = [
+        {
+          id: 1,
+          title: "sales",
+          amount: `$${totalSales}`,
+          icon: <MonetizationOnIcon sx={{ fontSize: "3rem" }} />,
+          bgColor: deepPurple[100],
+          color: deepPurple[700],
+        },
+        {
+          id: 2,
+          title: "profit",
+          amount: `$${totalSales-totalPurchases}`,
+          icon: <ShoppingCartIcon sx={{ fontSize: "3rem" }} />,
+          bgColor: pink[100],
+          color: pink[700],
+        },
+        {
+          id: 3,
+          title: "purchases",
+          amount: `$${totalPurchases}`,
+          icon: <PaymentsIcon sx={{ fontSize: "3rem" }} />,
+          bgColor: amber[100],
+          color: amber[700],
+        },
+      ];
   return (
     <Stack
       justifyContent="center"
